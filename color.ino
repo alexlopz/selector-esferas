@@ -10,6 +10,7 @@ Servo topServo;
 Servo bottomServo;
 int frequency = 0;
 int color = 0;
+int temp = 0;
 
 LiquidCrystal_I2C lcd(0x27, 16, 2);
 
@@ -26,41 +27,42 @@ void setup() {
   bottomServo.attach(8);
   Serial.begin(9600);
 
+  Serial.println(topServo.read());
+
   lcd.init();
   lcd.backlight();
   lcd.clear();
   lcd.setCursor(0, 0);
-  lcd.print("Lector de esferas..."); // Mensaje a despegar
+  lcd.print("Lector de esferas...");
   delay(3000);
 }
 void loop() {
-  topServo.write(115);
+  topServo.write(130);
   Serial.println("inicio");
   delay(2000);
 
-  for (int i = 115; i > 65; i--) {
+  for (int i = 130; i > 90; i--) {
     topServo.write(i);
     delay(8);
   }
   delay(1000);
 
+  lcd.clear();
+  lcd.print("leyendo esfera...");
   color = readColor();
   delay(10);
   switch (color) {
     case 1:
-      bottomServo.write(65);
+      bottomServo.write(20);
       Serial.println("se mueve rojo");
       break;
     case 2:
-      bottomServo.write(85);
+      bottomServo.write(50);
       Serial.println("se mueve amarillo");
       break;
     case 3:
-      bottomServo.write(105);
+      bottomServo.write(90);
       Serial.println("se mueve verde");
-      break;
-    case 4:
-      bottomServo.write(125);
       break;
     case 0:
       lcd.clear();
@@ -69,13 +71,13 @@ void loop() {
   }
   delay(300);
 
-  for (int i = 65; i > 29; i--) {
+  for (int i = 90; i > 44; i--) {
     topServo.write(i);
     delay(8);
   }
   delay(200);
 
-  for (int i = 29; i < 115; i++) {
+  for (int i = 44; i < 130; i++) {
     topServo.write(i);
     delay(2);
   }
@@ -116,20 +118,20 @@ int readColor() {
   Serial.print(frequency);//printing RED color frequency
   Serial.println("  ");
   delay(50);
-  if (R<100 & R>70 & G<150 & G>120) {
-    color = 1; // Red
+  if (R<135 & R>99 & G<245 & G>201) {// ROJO
+    color = 1; 
     lcd.clear();
     lcd.print("Rojo :)");
     Serial.println("rojo");
   }
-  if (R<9x0 & R>50 & G<80 & G>55) {
+  if (R<107 & R>70 & G<105 & G>85) { // AMARILLO
     color = 2; 
     lcd.clear();
     lcd.print("Amarillo :)");
     Serial.println("amarillo");
   }
-  if (R<120 & R>90 & G<100 & G>75) {
-    color = 3; // Green
+  if (R<165 & R>145 & G<120 & G>100) {// VERDE
+    color = 3;
     lcd.clear();
     lcd.print("Verde :)");
     Serial.println("verde");
