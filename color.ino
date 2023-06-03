@@ -53,19 +53,19 @@ void loop() {
   delay(10);
   switch (color) {
     case 1:
-      bottomServo.write(20);
+      bottomServo.write(10);
       Serial.println("se mueve rojo");
       break;
     case 2:
-      bottomServo.write(40);
+      bottomServo.write(30);
       Serial.println("se mueve amarillo");
       break;
     case 3:
-      bottomServo.write(70);
+      bottomServo.write(50);
       Serial.println("se mueve verde");
       break;
     case 0:
-    bottomServo.write(90);
+    bottomServo.write(70);
       lcd.clear();
       lcd.print("Desconocido");
       break;
