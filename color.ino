@@ -57,14 +57,15 @@ void loop() {
       Serial.println("se mueve rojo");
       break;
     case 2:
-      bottomServo.write(50);
+      bottomServo.write(40);
       Serial.println("se mueve amarillo");
       break;
     case 3:
-      bottomServo.write(90);
+      bottomServo.write(70);
       Serial.println("se mueve verde");
       break;
     case 0:
+    bottomServo.write(90);
       lcd.clear();
       lcd.print("Desconocido");
       break;
